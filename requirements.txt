@@ -1,0 +1,11 @@
+fastapi
+uvicorn[standard]
+pydantic
+neo4j
+python-dotenv
+pytest
+httpx
+python-docx
+ftfy
+qdrant-client
+sentence-transformers
