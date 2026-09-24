@@ -1,16 +1,16 @@
-\# FinGraph AI
+# FinGraph AI
 
 
 
-A small financial research assistant built with \*\*RAG, Neo4j, Qdrant, and a local LLM\*\*.
+A small financial research assistant built with **RAG, Neo4j, Qdrant, and a local LLM**.
 
 
 
-The goal of this project is to experiment with \*\*GraphRAG\*\* and understand how vector search and knowledge graphs can work together when answering questions about financial documents.
+The goal of this project is to experiment with **GraphRAG** and understand how vector search and knowledge graphs can work together when answering questions about financial documents.
 
 
 
-\## How it works
+## How it works
 
 
 
@@ -18,31 +18,31 @@ The goal of this project is to experiment with \*\*GraphRAG\*\* and understand h
 
 Financial Document
 
-&#x20;      │
+      │
 
-&#x20;      ├──► Qdrant ──► Semantic Search
+      ├──► Qdrant ──► Semantic Search
 
-&#x20;      │
+      │
 
-&#x20;      └──► Neo4j ───► Relationships
+      └──► Neo4j ───► Relationships
 
-&#x20;                        │
+                        │
 
-&#x20;                        ▼
+                        ▼
 
-&#x20;                      GraphRAG
+                      GraphRAG
 
-&#x20;                        │
+                        │
 
-&#x20;                        ▼
+                        ▼
 
-&#x20;                   Qwen3 8B
+                   Qwen3 8B
 
-&#x20;                        │
+                        │
 
-&#x20;                        ▼
+                        ▼
 
-&#x20;                   Final Answer
+                   Final Answer
 
 ```
 
@@ -52,15 +52,15 @@ The system combines:
 
 
 
-\* \*\*Qdrant\*\* for document embeddings and semantic search
+* **Qdrant** for document embeddings and semantic search
 
-\* \*\*Neo4j\*\* for financial relationships and knowledge graphs
+* **Neo4j** for financial relationships and knowledge graphs
 
-\* \*\*Ollama + Qwen3 8B\*\* for local LLM inference
+* **Ollama + Qwen3 8B** for local LLM inference
 
-\* \*\*FastAPI\*\* for the API
+* **FastAPI** for the API
 
-\* \*\*Docker Compose\*\* for running everything together
+* **Docker Compose** for running everything together
 
 
 
@@ -80,7 +80,7 @@ It retrieves relevant parts of the annual report, combines them with information
 
 
 
-\## Project Structure
+## Project Structure
 
 
 
@@ -92,19 +92,19 @@ app/
 
 └── services/
 
-&#x20;   ├── embedding\_service.py
+   ├── embedding\_service.py
 
-&#x20;   ├── retrieval\_service.py
+   ├── retrieval\_service.py
 
-&#x20;   ├── vector\_store\_service.py
+   ├── vector\_store\_service.py
 
-&#x20;   ├── neo4j\_service.py
+   ├── neo4j\_service.py
 
-&#x20;   ├── llm\_service.py
+   ├── llm\_service.py
 
-&#x20;   ├── rag\_service.py
+   ├── rag\_service.py
 
-&#x20;   └── graph\_rag\_service.py
+   └── graph\_rag\_service.py
 
 
 
@@ -122,7 +122,7 @@ requirements.txt
 
 
 
-\## Run
+## Run
 
 
 
@@ -164,23 +164,23 @@ http://localhost:8000/docs
 
 
 
-\## Status
+## Status
 
 
 
-This is a \*\*v0.1 portfolio project\*\*. The main goal is to demonstrate the architecture and the integration of RAG, vector search, knowledge graphs, and LLMs rather than build a production-ready financial platform.
+This is a **v0.1 portfolio project**. The main goal is to demonstrate the architecture and the integration of RAG, vector search, knowledge graphs, and LLMs rather than build a production-ready financial platform.
 
 
 
-\## Author
+## Author
 
 
 
-\*\*Ali Forouzan\*\*
+**Ali Forouzan**
 
 
 
-AI Engineer \& Backend Software Engineer
+AI Engineer & Backend Software Engineer
 
 
 
