@@ -97,6 +97,36 @@ class Neo4jService:
 
             return [record.data() for record in result]
 
+    def get_metric(
+        self,
+        company_name: str,
+        metric_name: str,
+    ):
+        query = """
+        MATCH (company:Company {name: $company_name})
+              -[:REPORTED]->(metric:FinancialMetric {
+                  name: $metric_name
+              })
+              -[:FOR_PERIOD]->(period:ReportingPeriod)
+
+        RETURN company.name AS company,
+               metric.name AS metric,
+               metric.value AS value,
+               metric.unit AS unit,
+               metric.growth AS growth,
+               period.year AS year
+        ORDER BY period.year DESC
+        """
+
+        with self.driver.session() as session:
+            result = session.run(
+                query,
+                company_name=company_name,
+                metric_name=metric_name,
+            )
+
+            return [record.data() for record in result]
+
     def get_financial_graph(self, company_name: str):
         query = """
         MATCH (company:Company {name: $company_name})
@@ -140,6 +170,69 @@ class Neo4jService:
                 }
 
             return record.data()
+
+    def get_business_relationships(self, company_name: str):
+        query = """
+        MATCH (company:Company {name: $company_name})
+              -[:HAS_SEGMENT]->(segment:BusinessSegment)
+              -[:HAS_PRODUCT]->(product:Product)
+
+        WITH company.name AS company,
+             segment.name AS segment,
+             product.name AS product,
+             product.revenue AS revenue,
+             product.revenue_unit AS revenue_unit,
+             product.growth AS growth,
+             product.revenue_note AS revenue_note
+
+        RETURN company,
+               segment,
+               product,
+               revenue,
+               revenue_unit,
+               growth,
+               revenue_note
+        ORDER BY product
+        """
+
+        with self.driver.session() as session:
+            result = session.run(
+                query,
+                company_name=company_name,
+            )
+
+            return [record.data() for record in result]
+
+    def get_product_relationships(
+        self,
+        company_name: str,
+        product_name: str,
+    ):
+        query = """
+        MATCH (company:Company {name: $company_name})
+              -[:HAS_SEGMENT]->(segment:BusinessSegment)
+              -[:HAS_PRODUCT]->(product:Product {
+                  name: $product_name
+              })
+
+        RETURN company.name AS company,
+               segment.name AS segment,
+               product.name AS product,
+               product.revenue AS revenue,
+               product.revenue_unit AS revenue_unit,
+               product.growth AS growth,
+               product.revenue_note AS revenue_note
+        ORDER BY product
+        """
+
+        with self.driver.session() as session:
+            result = session.run(
+                query,
+                company_name=company_name,
+                product_name=product_name,
+            )
+
+            return [record.data() for record in result]
 
     def close(self):
         self.driver.close()
